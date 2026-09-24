@@ -17,9 +17,9 @@ public class PerawatanHewan {
     
     //Constructor
     public PerawatanHewan(int idPerawatan, String jenisPerawatan, String tanggal) {
-        this.idPerawatan = idPerawatan;
-        this.jenisPerawatan = jenisPerawatan;
-        this.tanggal = tanggal;
+        setIdPerawatan(idPerawatan);
+        setJenisPerawatan(jenisPerawatan);
+        setTanggal(tanggal);
     }
     
     //Getter dan Setter
@@ -28,6 +28,9 @@ public class PerawatanHewan {
     }
     
     public void setIdPerawatan(int idPerawatan) {
+        if (idPerawatan < 0){
+            throw new IllegalArgumentException("ID Perawatan tidak boleh negatif!");
+        }
         this.idPerawatan = idPerawatan; 
     }
     
@@ -36,7 +39,10 @@ public class PerawatanHewan {
     }
     
     public void setJenisPerawatan(String jenisPerawatan) {
-        this.jenisPerawatan = jenisPerawatan;
+         if (jenisPerawatan == null || jenisPerawatan.trim().isEmpty()){
+            throw new IllegalArgumentException("Data Perawatan tidak boleh kosong!");
+        }
+        this.jenisPerawatan = jenisPerawatan.trim();
     }
     
     public String getTanggal() {
@@ -44,7 +50,10 @@ public class PerawatanHewan {
     }
     
     public void setTanggal(String tanggal) {
-        this.tanggal = tanggal;
+        if (tanggal == null || !tanggal.trim().matches("\\d{2}-\\d{2}-\\d{4}")){
+            throw new IllegalArgumentException("Format tanggal harus dd-mm-yyyy, contoh 02-06-2026");
+        }
+        this.tanggal = tanggal.trim();
     }
     
 }

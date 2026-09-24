@@ -20,12 +20,12 @@ public class Hewan {
     
     //Constructor
     public Hewan(int id, String nama, String jenis, int umur, String habitat, PerawatanHewan perawatan) {
-        this.id = id;
-        this.nama = nama;
-        this.jenis = jenis;
-        this.umur = umur;
-        this.habitat = habitat;
-        this.perawatan = perawatan;
+        setId(id);
+        setNama(nama);
+        setJenis(jenis);
+        setUmur(umur);
+        setHabitat(habitat);
+        setPerawatan(perawatan);
     }
     
     //Getter dan Setter
@@ -34,6 +34,9 @@ public class Hewan {
     }
     
     public void setId(int id) {
+        if (id < 0){
+            throw new IllegalArgumentException("ID Hewan tidak boleh negatif!");
+        }
         this.id = id;
     }
     
@@ -42,7 +45,10 @@ public class Hewan {
     }
     
     public void setNama(String nama) {
-        this.nama = nama;
+        if (nama == null || nama.trim().isEmpty()){
+            throw new IllegalArgumentException("Nama Hewan tidak boleh kosong!");
+        }
+        this.nama = nama.trim();
     }
 
     public String getJenis() {
@@ -50,7 +56,10 @@ public class Hewan {
     }
    
     public void setJenis(String jenis) {
-        this.jenis = jenis;
+        if (jenis == null || jenis.trim().isEmpty()){
+            throw new IllegalArgumentException("Jenis Hewan tidak boleh kosong!");
+        }
+        this.jenis = jenis.trim();
     }
     
     public int getUmur() {
@@ -58,6 +67,9 @@ public class Hewan {
     }
         
     public void setUmur(int umur) {
+        if (umur < 0){
+            throw new IllegalArgumentException("Umur Hewan tidak boleh negatif!");
+        }
         this.umur = umur;
     }
     
@@ -66,7 +78,10 @@ public class Hewan {
     }
     
     public void setHabitat(String habitat) {
-        this.habitat = habitat;
+        if (habitat == null || habitat.trim().isEmpty()){
+            throw new IllegalArgumentException("Habitat Hewan tidak boleh kosong!");
+        }
+        this.habitat = habitat.trim();
     }
     
     public PerawatanHewan getPerawatan() {
@@ -74,7 +89,26 @@ public class Hewan {
     }
     
     public void setPerawatan(PerawatanHewan perawatan) {
+        if (perawatan == null){
+            throw new IllegalArgumentException("Data Perawatan tidak boleh kosong!");
+        }
         this.perawatan = perawatan;
+    }
+    
+    public String getLabel() {
+        return null;
+    }
+    
+    public void setNilai(double nilai) {
+    }
+    
+    public void tampilkanInfoLengkap() {
+        System.out.println("Id : " + id);
+        System.out.println("Nama : " + nama);
+        System.out.println("Jenis : " + jenis);
+        System.out.println("Umur : " + umur);
+        System.out.println("Habitat : " + habitat);
+        System.out.println("Perawatan : " + perawatan.getJenisPerawatan() + "(" + perawatan.getTanggal() + ")");
     }
     
 }
